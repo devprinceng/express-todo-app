@@ -8,14 +8,14 @@
                 </span>
             </div>
             <div class="card-body">
-                <form action="/update-todo" method="post">
+                <form action="/update-todo/<%= todo._id %>" method="post">
                     <div class="mb-3">
                         <input
                             type="text"
                             class="form-control"
                             name="title"
                             id="titile"
-                            value="Todo 1"
+                            value="<%= todo.title %>"
                             placeholder="Enter Todo"
                         />
                     </div>
@@ -25,7 +25,7 @@
                             class="form-control py-3"
                             name="description"
                             id="description"
-                            value="Description 1"
+                            value="<%=todo.description%>"
                             placeholder="Description"
                         />
                     </div>

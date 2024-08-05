@@ -22,10 +22,12 @@ const homeController = async (req, res, next) => {
     }
 }
  // edit todo form controller
-const editTodoController = (req, res, next) => {
+const editTodoController = async (req, res, next) => {
     try {
+        const { id } = req.query;
+        const todo = await Todo.findById(id);
         const title = 'Edit Todo'
-        res.render('edit-todo', {title})
+        res.render('edit-todo', {title, todo})
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -61,10 +63,31 @@ const deleteTodoController = (req, res, next) => {
     }
 }
 
+ // update todo form controller
+const updateTodoController = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const { title, description } = req.body;
+
+        const todo = await Todo.findById(id);
+        if(!todo){
+            return res.status(404).json({message: 'todo not found'})
+        }
+        todo.title = title;
+        todo.description = description;
+        await todo.save();
+
+        return res.redirect('/')
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+
 module.exports = { 
     homeController,
     todoFormController,
     editTodoController,
     deleteTodoController,
-    createTodoController
+    createTodoController,
+    updateTodoController
 };
