@@ -12,7 +12,7 @@
                 <div class="table-responsive-md">
                     <table class="table table-hover">
                         <thead>
-                            <tr>
+                            <tr class="border border-2 border-bottom">
                                 <th scope="col">Title</th>
                                 <th scope="col">Description</th>
                                 <th scope="col">Created</th>
@@ -28,7 +28,7 @@
                                 <td><%=moment(todo.createdAt).format("MM DD YY HH:MM:SS")%></td>
                                 <td><%=moment(todo.updatedAt).format("MM DD YY HH:MM:SS")%></td>
                                 <td class="d-flex justify-content-around"> 
-                                    <a href="/edit-todo" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="/edit-todo" class="btn btn-success btn-sm me-1">Edit</a>
                                     <a href="/delete-todo" class="btn btn-danger btn-sm" title="delete">Del</a>
                                 </td>
                             </tr>
