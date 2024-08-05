@@ -39,9 +39,32 @@ const deleteTodoController = (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
+
+ const createTodoController = async(req, res, next) => {
+    try {
+        console.log(req.body);
+        
+        const {title, description} = req.body;
+        if(!title){
+           return res.status(400).json({message: "Todo title is required"});
+        }
+        
+        const todo = await Todo.create({
+            title,
+            description,
+        });
+        if (todo){
+            return res.redirect('/');
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message});
+    }
+}
+
 module.exports = { 
     homeController,
     addTodoController,
     editTodoController,
-    deleteTodoController
+    deleteTodoController,
+    createTodoController
 };
