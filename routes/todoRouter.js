@@ -1,21 +1,11 @@
 const express = require('express');
 const Todo = require('../models/Todo')
-const moment = require('moment')
+const { homeController } = require('../controllers/TodoController')
 //initiate route
 const todoRouter = express.Router();
 
 //home route
-todoRouter.get('/', async (req, res, next) => {
-    try {
-        const title = 'All Todos'
-        const todos = await Todo.find({}).sort({createdAt: -1});
-        res.locals.moment = moment;
-        res.render('index', {title, todos})
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-    
-})
+todoRouter.get('/', homeController)
 
 //newtodo route
 todoRouter.get('/newtodo', (req, res, next) => {
