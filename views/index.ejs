@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %> | Todo App</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="card col-md-10 mx-auto border-default">
+            <div class="card-header bg-default">
+                <span class="d-flex justify-content-between">
+                    <div class="card-title fs-4 fw-bold">All Todos</div>
+                    <a class="btn btn-dark fw-bold">Add</a>
+                </span>
+                
+            </div>
+            <div class="card-body">
+                <div class="table-responsive-md">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Created</th>
+                                <th scope="col">Updated</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Task 1</td>
+                                <td>Description 1</td>
+                                <td>2/3/23 5:15</td>
+                                <td>2/3/23 5:15</td>
+                                <td> 
+                                    <a href="#" class="btn btn-success btn-sm">Edit</a>
+                                    <a href="#" class="btn btn-danger btn-sm" title="delete">Del</a>
+                                   
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="/js/jquery.slim.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
