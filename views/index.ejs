@@ -1,6 +1,6 @@
     <%- include('partials/header') %>
     <div class="container my-5">
-        <div class="card col-md-10 mx-auto border-default">
+        <div class="card col-md-12 mx-auto border-default">
             <div class="card-header bg-default">
                 <span class="d-flex justify-content-between">
                     <div class="card-title fs-4 fw-bold">All Todos</div>
@@ -21,16 +21,18 @@
                             </tr>
                         </thead>
                         <tbody>
+                            <% for (const todo of todos) { %>
                             <tr>
-                                <td>Task 1</td>
-                                <td>Description 1</td>
-                                <td>2/3/23 5:15</td>
-                                <td>2/3/23 5:15</td>
+                                <td><%=todo.title %></td>
+                                <td><%=todo.description%></td>
+                                <td><%=todo.createdAt%></td>
+                                <td><%=todo.updatedAt%></td>
                                 <td> 
                                     <a href="/edit-todo" class="btn btn-success btn-sm">Edit</a>
                                     <a href="/delete-todo" class="btn btn-danger btn-sm" title="delete">Del</a>
                                 </td>
                             </tr>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>
