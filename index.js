@@ -27,5 +27,11 @@ app.get('/', (req, res, next) => {
     const title = 'All Todos'
     res.render('index', {title})
 })
+//newtodo route
+app.get('/newtodo', (req, res, next) => {
+    const title = 'New Todo'
+    res.render('newtodo', {title})
+})
+
 //listen on our server
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
