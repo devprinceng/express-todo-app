@@ -50,6 +50,14 @@ app.get('/edit-todo', (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 })
-
+//delete todo route
+app.get('/delete-todo', (req, res, next) => {
+    try {
+        const title = 'Delete Todo'
+        res.render('delete-todo', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
 //listen on our server
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
