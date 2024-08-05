@@ -1,25 +1,16 @@
 const express = require('express')
 const path = require('path')
-const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const app = express()
 const connectMongoDb = require('./init/MongoDb');
+const Todo = require('./models/Todo');
 dotenv.config();
 const PORT = process.env.PORT || 3000
 
 //connect Database
 connectMongoDb();
-
-//create Schema
-const toDoschema = mongoose.Schema({
-    title: {type: String, required: true},
-    description: String,
-}, {timestamps: true});
-
-//create todo model
-const Todo = mongoose.model('todo', toDoschema);
 
 //set view engine
 app.set('view engine', 'ejs');
