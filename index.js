@@ -2,7 +2,6 @@ const express = require('express')
 const path = require('path')
 const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
-const moment = require('moment');
 const app = express()
 const connectMongoDb = require('./init/MongoDb');
 const todoRouter = require('./routes/todoRouter');

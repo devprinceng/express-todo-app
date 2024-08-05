@@ -13,7 +13,7 @@ const homeController = async (req, res, next) => {
     }
 }
 // todo form controller
- const addTodoController = (req, res, next) => {
+ const todoFormController = (req, res, next) => {
     try {
         const title = 'New Todo'
         res.render('newtodo', {title})
@@ -63,7 +63,7 @@ const deleteTodoController = (req, res, next) => {
 
 module.exports = { 
     homeController,
-    addTodoController,
+    todoFormController,
     editTodoController,
     deleteTodoController,
     createTodoController
