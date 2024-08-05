@@ -24,13 +24,31 @@ app.use('/js', express.static(path.join(__dirname, 'node_modules/@popperjs/core/
 
 //home route
 app.get('/', (req, res, next) => {
-    const title = 'All Todos'
-    res.render('index', {title})
+    try {
+        const title = 'All Todos'
+        res.render('index', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+    
 })
 //newtodo route
 app.get('/newtodo', (req, res, next) => {
-    const title = 'New Todo'
-    res.render('newtodo', {title})
+    try {
+        const title = 'New Todo'
+        res.render('newtodo', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+})
+//edit todo route
+app.get('/newtodo', (req, res, next) => {
+    try {
+        const title = 'Edit Todo'
+        res.render('newtodo', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
 })
 
 //listen on our server
