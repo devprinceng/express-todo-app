@@ -2,6 +2,8 @@ const express = require('express')
 const path = require('path')
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const bodyParser = require('body-parser');
+const moment = require('moment');
 const app = express()
 dotenv.config();
 const PORT = process.env.PORT || 3000
@@ -10,6 +12,15 @@ const PORT = process.env.PORT || 3000
 mongoose.connect(process.env.DBCONNECTIONSTRING)
     .then(() => console.log('Database Connection Successful'))
     .catch((erorr) => console.log(erorr.message));
+
+//create Schema
+const toDoschema = mongoose.Schema({
+    title: {type: String, required: true},
+    description: String,
+}, {timestamps: true});
+
+//create todo model
+const Todo = mongoose.model('todo', toDoschema);
 
 //set view engine
 app.set('view engine', 'ejs');
@@ -20,13 +31,15 @@ app.use('/css', express.static(path.join(__dirname, 'node_modules/bootstrap/dist
 app.use('/js',express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/jquery/dist')))
 app.use('/js', express.static(path.join(__dirname, 'node_modules/@popperjs/core/dist/umd')))
-
+app.use(bodyParser.urlencoded({extended:true}));
 
 //home route
-app.get('/', (req, res, next) => {
+app.get('/', async (req, res, next) => {
     try {
         const title = 'All Todos'
-        res.render('index', {title})
+        const todos = await Todo.find({});
+        // res.locale.moment = moment;
+        res.render('index', {title, todos})
     } catch (error) {
         res.status(500).json({message: error.message})
     }
@@ -57,6 +70,27 @@ app.get('/delete-todo', (req, res, next) => {
         res.render('delete-todo', {title})
     } catch (error) {
         res.status(500).json({message: error.message})
+    }
+})
+// add new student post route
+app.post('/create-todo', async(req, res, next) => {
+    try {
+        console.log(req.body);
+        
+        const {title, description} = req.body;
+        if(!title || !description){
+            res.status(401).json({message: "All fields must be Completed"});
+        }
+        
+        const todo = await Todo.create({
+            title,
+            description,
+        });
+        if (todo){
+            return res.redirect('/');
+        }
+    } catch (error) {
+        res.status(500).json({message: error.message});
     }
 })
 //listen on our server
