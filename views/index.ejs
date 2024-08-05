@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %> | Todo App</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-</head>
-<body>
+    <%- include('partials/header') %>
     <div class="container my-5">
         <div class="card col-md-10 mx-auto border-default">
             <div class="card-header bg-default">
@@ -37,7 +29,6 @@
                                 <td> 
                                     <a href="/edit-todo" class="btn btn-success btn-sm">Edit</a>
                                     <a href="/delete-todo" class="btn btn-danger btn-sm" title="delete">Del</a>
-                                   
                                 </td>
                             </tr>
                         </tbody>
@@ -48,9 +39,4 @@
         </div>
         
     </div>
-
-    <script src="/js/jquery.slim.min.js"></script>
-    <script src="/js/popper.min.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-</body>
-</html>
+<%- include('partials/footer') %>
