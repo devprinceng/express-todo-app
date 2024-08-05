@@ -30,5 +30,18 @@ const editTodoController = (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
-
-module.exports = { homeController, addTodoController, editTodoController };
+//delete confirmation controller
+const deleteTodoController = (req, res, next) => {
+    try {
+        const title = 'Delete Todo'
+        res.render('delete-todo', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
+module.exports = { 
+    homeController,
+    addTodoController,
+    editTodoController,
+    deleteTodoController
+};

@@ -3,7 +3,8 @@ const Todo = require('../models/Todo')
 const { 
     homeController,
     addTodoController,
-    editTodoController
+    editTodoController,
+    deleteTodoController
 } = require('../controllers/TodoController')
 //initiate route
 const todoRouter = express.Router();
@@ -15,14 +16,7 @@ todoRouter.get('/newtodo', addTodoController)
 //edit todo route
 todoRouter.get('/edit-todo', editTodoController)
 //delete todo route
-todoRouter.get('/delete-todo', (req, res, next) => {
-    try {
-        const title = 'Delete Todo'
-        res.render('delete-todo', {title})
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
+todoRouter.get('/delete-todo', deleteTodoController)
 // add new student post route
 todoRouter.post('/create-todo', async(req, res, next) => {
     try {
