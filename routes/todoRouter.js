@@ -1,21 +1,13 @@
 const express = require('express');
 const Todo = require('../models/Todo')
-const { homeController } = require('../controllers/TodoController')
+const { homeController, addTodoController } = require('../controllers/TodoController')
 //initiate route
 const todoRouter = express.Router();
 
 //home route
 todoRouter.get('/', homeController)
-
 //newtodo route
-todoRouter.get('/newtodo', (req, res, next) => {
-    try {
-        const title = 'New Todo'
-        res.render('newtodo', {title})
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
+todoRouter.get('/newtodo', addTodoController)
 //edit todo route
 todoRouter.get('/edit-todo', (req, res, next) => {
     try {

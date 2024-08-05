@@ -12,5 +12,14 @@ const homeController = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
+// todo form controller
+ const addTodoController = (req, res, next) => {
+    try {
+        const title = 'New Todo'
+        res.render('newtodo', {title})
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
 
-module.exports = { homeController };
+module.exports = { homeController, addTodoController };
