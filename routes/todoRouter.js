@@ -1,6 +1,10 @@
 const express = require('express');
 const Todo = require('../models/Todo')
-const { homeController, addTodoController } = require('../controllers/TodoController')
+const { 
+    homeController,
+    addTodoController,
+    editTodoController
+} = require('../controllers/TodoController')
 //initiate route
 const todoRouter = express.Router();
 
@@ -9,14 +13,7 @@ todoRouter.get('/', homeController)
 //newtodo route
 todoRouter.get('/newtodo', addTodoController)
 //edit todo route
-todoRouter.get('/edit-todo', (req, res, next) => {
-    try {
-        const title = 'Edit Todo'
-        res.render('edit-todo', {title})
-    } catch (error) {
-        res.status(500).json({message: error.message})
-    }
-})
+todoRouter.get('/edit-todo', editTodoController)
 //delete todo route
 todoRouter.get('/delete-todo', (req, res, next) => {
     try {
