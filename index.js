@@ -5,13 +5,12 @@ const dotenv = require('dotenv')
 const bodyParser = require('body-parser');
 const moment = require('moment');
 const app = express()
+const connectMongoDb = require('./init/MongoDb');
 dotenv.config();
 const PORT = process.env.PORT || 3000
 
-//connect database
-mongoose.connect(process.env.DBCONNECTIONSTRING)
-    .then(() => console.log('Database Connection Successful'))
-    .catch((erorr) => console.log(erorr.message));
+//connect Database
+connectMongoDb();
 
 //create Schema
 const toDoschema = mongoose.Schema({
