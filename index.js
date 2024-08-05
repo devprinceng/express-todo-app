@@ -37,8 +37,8 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/', async (req, res, next) => {
     try {
         const title = 'All Todos'
-        const todos = await Todo.find({});
-        // res.locale.moment = moment;
+        const todos = await Todo.find({}).sort({createdAt: -1});
+        res.locals.moment = moment;
         res.render('index', {title, todos})
     } catch (error) {
         res.status(500).json({message: error.message})
@@ -78,8 +78,8 @@ app.post('/create-todo', async(req, res, next) => {
         console.log(req.body);
         
         const {title, description} = req.body;
-        if(!title || !description){
-            res.status(401).json({message: "All fields must be Completed"});
+        if(!title){
+           return res.status(400).json({message: "Todo title is required"});
         }
         
         const todo = await Todo.create({
