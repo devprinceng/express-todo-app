@@ -1,7 +1,7 @@
 const Todo = require('../models/Todo');
 const moment = require('moment')
 
-//list todos controller
+//*list todos controller
 const homeController = async (req, res, next) => {
     try {
         const title = 'All Todos'
@@ -12,7 +12,7 @@ const homeController = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
-// todo form controller
+//* todo form controller
  const todoFormController = (req, res, next) => {
     try {
         const title = 'New Todo'
@@ -21,7 +21,7 @@ const homeController = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
- // edit todo form controller
+ //* edit todo form controller
 const editTodoController = async (req, res, next) => {
     try {
         const { id } = req.query;
@@ -32,20 +32,20 @@ const editTodoController = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
-//delete confirmation controller
-const deleteTodoController = (req, res, next) => {
+//*delete confirmation controller
+const deleteTodoPageController = (req, res, next) => {
     try {
+        const { id } = req.query;
+        
         const title = 'Delete Todo'
-        res.render('delete-todo', {title})
+        res.render('delete-todo', {title, id})
     } catch (error) {
         res.status(500).json({message: error.message})
     }
 }
-
+//* create todo controller
  const createTodoController = async(req, res, next) => {
     try {
-        console.log(req.body);
-        
         const {title, description} = req.body;
         if(!title){
            return res.status(400).json({message: "Todo title is required"});
@@ -82,12 +82,26 @@ const updateTodoController = async (req, res, next) => {
         res.status(500).json({message: error.message})
     }
 }
+//*delete todo controller
+const deleteTodoController = async (req, res, next) => {
+    try {
+        const { id, confirm} = req.query;
+        
+        if (confirm==='yes'){
+            await Todo.findByIdAndDelete(id)
+        }
 
+        res.redirect('/')
+    } catch (error) {
+        res.status(500).json({message: error.message})
+    }
+}
 module.exports = { 
     homeController,
     todoFormController,
     editTodoController,
-    deleteTodoController,
+    deleteTodoPageController,
     createTodoController,
-    updateTodoController
+    updateTodoController,
+    deleteTodoController
 };
