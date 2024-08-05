@@ -42,10 +42,10 @@ app.get('/newtodo', (req, res, next) => {
     }
 })
 //edit todo route
-app.get('/newtodo', (req, res, next) => {
+app.get('/edit-todo', (req, res, next) => {
     try {
         const title = 'Edit Todo'
-        res.render('newtodo', {title})
+        res.render('edit-todo', {title})
     } catch (error) {
         res.status(500).json({message: error.message})
     }
